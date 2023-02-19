@@ -11,6 +11,8 @@ Bnotes_tbl <- read_delim(file ="../data/Bnotes.txt", delim = "\t", col_names = c
 
 # Data Cleaning
 Aclean_tbl <- Adata_tbl %>%
-  separate_wider_delim(cols = qs, delim = " - ", names = c("q1", "q2", "q3", "q4", "q5")) %>%
-  mutate(datadate = mdy_hms(datadate))
-  
+  separate_wider_delim(cols = qs, delim = " - ", names = paste0("q", 1:5)) %>%
+  mutate(datadate = mdy_hms(datadate)) %>%
+  mutate(across(q1:q5, ~as.integer(.))) %>%
+  right_join(Anotes_tbl, by = "parnum") %>%
+  filter(is.na(notes))
