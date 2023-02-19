@@ -10,3 +10,7 @@ Bdata_tbl <- read_delim(file ="../data/Bparticipants.dat", delim = "\t", col_nam
 Bnotes_tbl <- read_delim(file ="../data/Bnotes.txt", delim = "\t", col_names = c("casenum", "notes"))
 
 # Data Cleaning
+Aclean_tbl <- Adata_tbl %>%
+  separate_wider_delim(cols = qs, delim = " - ", names = c("q1", "q2", "q3", "q4", "q5")) %>%
+  mutate(datadate = mdy_hms(datadate))
+  
