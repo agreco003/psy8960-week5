@@ -14,12 +14,12 @@ Aclean_tbl <- Adata_tbl %>%
   separate_wider_delim(cols = qs, delim = " - ", names = paste0("q", 1:5)) %>%
   mutate(datadate = mdy_hms(datadate)) %>%
   mutate(across(q1:q5, ~as.integer(.))) %>%
-  right_join(Anotes_tbl, by = "parnum") %>%
+  left_join(Anotes_tbl, by = "parnum") %>%
   filter(is.na(notes))
 Bclean_tbl <- Bdata_tbl %>%
   mutate(datadate = mdy_hms(datadate)) %>%
   mutate(across(q1:q10, ~as.integer(.))) %>%
-  right_join(Bnotes_tbl, by = "parnum") %>%
+  left_join(Bnotes_tbl, by = "parnum") %>%
   filter(is.na(notes)) %>%
   bind_rows(Aclean_tbl, .id = "lab") %>%
   select(-notes)
