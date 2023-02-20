@@ -23,3 +23,7 @@ Bclean_tbl <- Bdata_tbl %>%
   filter(is.na(notes)) %>%
   bind_rows(Aclean_tbl, .id = "lab") %>%
   select(-notes)
+
+
+#Alternate methods
+#for colnames, can use paste0("q", 1:10) to keep it as a character vector!! 
