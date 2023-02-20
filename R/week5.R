@@ -16,7 +16,7 @@ Aclean_tbl <- Adata_tbl %>%
   mutate(across(q1:q5, ~as.integer(.))) %>%
   left_join(Anotes_tbl, by = "parnum") %>%
   filter(is.na(notes))
-Bclean_tbl <- Bdata_tbl %>%
+ABclean_tbl <- Bdata_tbl %>%
   mutate(datadate = mdy_hms(datadate)) %>%
   mutate(across(q1:q10, ~as.integer(.))) %>%
   left_join(Bnotes_tbl, by = "parnum") %>%
@@ -25,5 +25,8 @@ Bclean_tbl <- Bdata_tbl %>%
   select(-notes)
 
 
-#Alternate methods
-#for colnames, can use paste0("q", 1:10) to keep it as a character vector!! 
+# Alternate methods
+# Line 9 - for colnames, can use paste0("q", 1:10) to keep it as a character vector!! 
+# Line 16 mutate(across(contains("q"), as.integer))
+# Joins, don't forget all the joins! full_join especially for longitudinal data
+# Pipes are nice, because you can add and remove steps without breaking everything or having to rewrite codes
